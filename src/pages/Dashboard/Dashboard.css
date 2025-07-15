@@ -25,6 +25,36 @@
   border-radius: 0.25rem;
 }
 
+.dashboard__widgets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .dashboard__widgets {
+    grid-template-columns: 1fr;
+  }
+}
+
+.operations {
+  margin-top: 1rem;
+}
+
+.operations__title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.operations__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.875rem;
+}
+
 .dashboard__pay {
   background: orange;
   color: #fff;

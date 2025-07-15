@@ -50,8 +50,21 @@ body {
   width: 24px;
   height: 24px;
   margin-bottom: 0.25rem;
-  background-color: var(--color-accent);
+  display: inline-block;
+  text-align: center;
 }
+
+.icon::before {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.icon-home::before { content: '🏠'; }
+.icon-car::before { content: '🚗'; }
+.icon-parts::before { content: '🛠️'; }
+.icon-expenses::before { content: '📊'; }
+.icon-settings::before { content: '⚙️'; }
 
 .card-stat {
   background: #fff;

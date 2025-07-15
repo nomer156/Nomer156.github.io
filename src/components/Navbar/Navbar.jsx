@@ -20,7 +20,7 @@ function Navbar() {
             'navbar__button' + (isActive ? ' navbar__button--active' : '')
           }
         >
-          <span className="icon icon-placeholder" aria-hidden />
+          <span className={`icon icon-${link.icon}`} aria-hidden />
           <span>{link.label}</span>
         </NavLink>
       ))}
