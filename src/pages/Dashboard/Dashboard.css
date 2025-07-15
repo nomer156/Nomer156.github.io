@@ -1,0 +1,47 @@
+.dashboard {
+  padding: 1rem;
+}
+
+.dashboard__title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.dashboard__mileage {
+  text-align: center;
+}
+
+.dashboard__progress {
+  width: 100%;
+  background: #eee;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.dashboard__progress-bar {
+  background: var(--color-primary);
+  height: 100%;
+  border-radius: 0.25rem;
+}
+
+.dashboard__pay {
+  background: orange;
+  color: #fff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.dashboard__add {
+  position: fixed;
+  bottom: 4rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+}
