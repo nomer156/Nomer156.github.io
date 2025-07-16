@@ -91,3 +91,7 @@ body {
     padding-bottom: 4rem;
   }
 }
+
+.ads-placeholder {
+  display: none !important;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth.js";
 import {
   getCarInfo,
   saveCarInfo,
@@ -8,11 +9,22 @@ import {
 import "./Car.css";
 
 function Car() {
+  const { user, setUser } = useAuth();
   const initial = getCarInfo();
   const [vin, setVin] = useState(initial.vin || "");
   const [mileage, setMileage] = useState(initial.mileage || "");
   const [tab, setTab] = useState("mods");
+  const [bindVin, setBindVin] = useState("");
   const mods = getMods();
+
+  const handleBind = async (e) => {
+    e.preventDefault();
+    await new Promise((r) => setTimeout(r, 500));
+    const updated = { ...user, carVin: bindVin };
+    setUser(updated);
+    localStorage.setItem('carVin', bindVin);
+    localStorage.setItem('user', JSON.stringify(updated));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,6 +35,21 @@ function Car() {
   return (
     <div className="car-page">
       <h1>Моя машина</h1>
+      {!user?.carVin ? (
+        <form className="vin-bind" onSubmit={handleBind}>
+          <input
+            className="vin-bind__input"
+            value={bindVin}
+            onChange={(e) => setBindVin(e.target.value)}
+            placeholder="VIN"
+          />
+          <button className="vin-bind__button" type="submit">
+            Привязать машину
+          </button>
+        </form>
+      ) : (
+        <div className="vin-card">VIN: {user.carVin}</div>
+      )}
       <form className="car-form" onSubmit={handleSubmit}>
         <label className="car-form__label">
           VIN

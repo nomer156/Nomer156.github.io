@@ -1,7 +1,6 @@
 import './Dashboard.css';
 import { useEffect, useState } from 'react';
 import CardStat from '../../components/CardStat/CardStat.jsx';
-import AdsPlaceholder from '../../components/AdsPlaceholder/AdsPlaceholder.jsx';
 import { getLastExpenses } from '../../hooks/useDB.js';
 
 function Dashboard() {
@@ -32,7 +31,6 @@ function Dashboard() {
           </button>
         </CardStat>
 
-        <AdsPlaceholder />
 
         <CardStat
           title="Расходы месяца"
