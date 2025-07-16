@@ -64,3 +64,16 @@
   border: none;
   border-radius: 0.25rem;
 }
+
+.settings__input,
+.settings__select {
+  padding: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.settings__about {
+  font-size: 0.875rem;
+  color: #666;
+}

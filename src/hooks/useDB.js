@@ -20,6 +20,13 @@ export function getLastExpenses(count = 3) {
   return Promise.resolve(items.slice(-count).reverse());
 }
 
+export function getMonthlyTotal(date = new Date()) {
+  const month = date.getMonth();
+  return getExpenses()
+    .filter((e) => new Date(e.date).getMonth() === month)
+    .reduce((sum, e) => sum + Number(e.sum), 0);
+}
+
 export function getCarInfo() {
   return JSON.parse(localStorage.getItem(DB_KEYS.CAR) || "{}");
 }

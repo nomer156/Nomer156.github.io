@@ -10,19 +10,28 @@
   margin-bottom: 1rem;
 }
 
-.expenses-charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+.expenses__summary {
   margin-bottom: 1rem;
 }
 
-.expenses-chart {
-  width: 100%;
-  height: 200px;
+.expenses__total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
-.expenses-item {
+.expenses__chart {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1rem;
+}
+
+.expenses__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expenses__item {
   display: flex;
   justify-content: space-between;
   padding: 0.25rem 0;
