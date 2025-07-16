@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth.js';
+import useAuth from '../hooks/useAuth.jsx';
 import './Login.css';
 
 function Login() {
@@ -8,31 +8,48 @@ function Login() {
   const { login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(username, password);
-    navigate('/');
+    const errs = {};
+    if (!username) errs.username = true;
+    if (!password) errs.password = true;
+    setErrors(errs);
+    if (Object.keys(errs).length === 0) {
+      await login(username, password);
+      navigate('/');
+    }
   };
 
   return (
     <div className="login-page">
       <h1>Вход</h1>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          className="login-form__input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        <input
-          className="login-form__input"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button className="login-form__submit" type="submit">
+      <form className="form" onSubmit={handleSubmit} noValidate>
+        <label className="form__label">
+          Username
+          <input
+            className="form__input"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && (
+            <span className="form__error">Обязательное поле</span>
+          )}
+        </label>
+        <label className="form__label">
+          Password
+          <input
+            className="form__input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && (
+            <span className="form__error">Обязательное поле</span>
+          )}
+        </label>
+        <button className="btn-primary" type="submit">
           Войти
         </button>
       </form>

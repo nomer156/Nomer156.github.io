@@ -95,3 +95,45 @@ body {
 .ads-placeholder {
   display: none !important;
 }
+
+.form {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form__label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+}
+
+.form__input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.form__error {
+  font-size: 0.75rem;
+  color: red;
+}
+
+.btn-primary {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+.car-card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.car-card h2 {
+  margin-top: 0;
+}
