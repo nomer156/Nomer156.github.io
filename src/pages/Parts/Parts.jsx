@@ -8,10 +8,26 @@ function Parts() {
   const [tab, setTab] = useState("all");
 
   useEffect(() => {
-    fetch("/data/parts.json")
-      .then((r) => r.json())
-      .then(setParts)
-      .catch(() => setParts([]));
+    const load = async () => {
+      await new Promise((r) => setTimeout(r, 500));
+      setParts([
+        {
+          id: 1,
+          name: "Масляный фильтр",
+          oem: "0001",
+          category: "Двигатель",
+          analogs: ["A1", "A2"],
+        },
+        {
+          id: 2,
+          name: "Тормозные колодки",
+          oem: "0002",
+          category: "Тормоза",
+          analogs: ["B1"],
+        },
+      ]);
+    };
+    load();
   }, []);
 
   const categories = ["Все", "Двигатель", "Тормоза", "Подвеска"];
