@@ -2,7 +2,7 @@ import './Dashboard.css';
 import { useEffect, useState } from 'react';
 import CardStat from '../../components/CardStat/CardStat.jsx';
 import { getLastExpenses, getMonthlyTotal } from '../../hooks/useDB.js';
-import useAuth from '../../hooks/useAuth.js';
+import useAuth from '../../hooks/useAuth.jsx';
 
 function Dashboard() {
   const { user, token } = useAuth();

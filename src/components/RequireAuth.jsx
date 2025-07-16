@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth.js';
+import useAuth from '../hooks/useAuth.jsx';
 
 function RequireAuth({ children }) {
   const { token } = useAuth();
