@@ -17,15 +17,13 @@ function Dashboard() {
       <p className="dashboard__mileage">Текущий пробег: 82 350 км</p>
 
       <div className="dashboard__widgets">
-        <CardStat title="Статус масла">
-          <p>2650 км / 45 дней до замены</p>
-          <div className="dashboard__progress">
-            <div className="dashboard__progress-bar" style={{ width: '75%' }} />
-          </div>
-        </CardStat>
+        <CardStat title="Масло" value="2650 км" subtitle="45 дней до замены" />
 
-        <CardStat title="Выдающий штраф">
-          <p>1500 ₽ • превышение</p>
+        <CardStat
+          title="Ближайший штраф"
+          value="1500 ₽"
+          subtitle="Превышение скорости"
+        >
           <button
             className="dashboard__pay"
             onClick={() => alert('Оплата пока недоступна')}
@@ -34,27 +32,23 @@ function Dashboard() {
           </button>
         </CardStat>
 
-        <CardStat title="Расходы месяца">
-          <p>18 750 ₽ / бюджет 25 000 ₽</p>
-          <div className="dashboard__progress">
-            <div className="dashboard__progress-bar" style={{ width: '75%' }} />
-          </div>
-        </CardStat>
-
         <AdsPlaceholder />
+
+        <CardStat
+          title="Расходы месяца"
+          value="18 750 ₽"
+          subtitle="Бюджет 25 000 ₽"
+        />
       </div>
 
-      <div className="operations">
-        <h3 className="operations__title">Последние операции</h3>
-        <ul className="operations__list">
-          {operations.map((op) => (
-            <li key={op.id} className="operations__item">
-              <span>{op.description}</span>
-              <span>{op.sum} ₽</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul className="operations">
+        {operations.map((op) => (
+          <li key={op.id} className="operations__item">
+            <span>{op.description}</span>
+            <span>{op.sum} ₽</span>
+          </li>
+        ))}
+      </ul>
 
       <button className="dashboard__add">+</button>
     </div>

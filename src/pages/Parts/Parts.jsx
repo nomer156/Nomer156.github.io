@@ -3,7 +3,7 @@ import "./Parts.css";
 
 function Parts() {
   const [parts, setParts] = useState([]);
-  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("Все");
   const [tab, setTab] = useState("all");
 
@@ -18,8 +18,8 @@ function Parts() {
 
   const filtered = parts.filter((p) => {
     const matchSearch =
-      p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.oem.includes(search);
+      p.name.toLowerCase().includes(filter.toLowerCase()) ||
+      p.oem.includes(filter);
     const matchCat = category === "Все" || p.category === category;
     return matchSearch && matchCat;
   });
@@ -29,8 +29,8 @@ function Parts() {
       <h1>Запчасти</h1>
       <input
         className="parts-search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
         placeholder="Поиск..."
       />
 
@@ -51,8 +51,8 @@ function Parts() {
       <div className="parts-tabs">
         {[
           { id: "all", label: "Все" },
-          { id: "oem", label: "Оригинал" },
-          { id: "analog", label: "Аналоги" },
+          { id: "oem", label: "Originals" },
+          { id: "analog", label: "Analogs" },
         ].map((t) => (
           <button
             key={t.id}
@@ -68,20 +68,20 @@ function Parts() {
 
       {filtered.length === 0 ? (
         <div className="parts__ai-placeholder">
-          AI-подбор недоступен offline (позже GPT-интеграция)
+          AI-подбор пока не доступен offline
         </div>
       ) : (
-        <ul className="parts-list">
+        <ul className="parts__list">
           {filtered.map((part) => (
-            <li key={part.id} className="part-card">
-              <h3 className="part-card__name">{part.name}</h3>
-              <p className="part-card__oem">OEM: {part.oem}</p>
-              <div className="part-card__analogs">
+            <li key={part.id} className="parts__card">
+              <h3 className="parts__card-name">{part.name}</h3>
+              <p className="parts__card-oem">OEM: {part.oem}</p>
+              <div className="parts__card-analogs">
                 {part.analogs.map((a) => (
                   <button
                     key={a}
                     onClick={() => navigator.clipboard.writeText(a)}
-                    className="part-card__analog"
+                    className="parts__card-analog"
                   >
                     {a}
                   </button>

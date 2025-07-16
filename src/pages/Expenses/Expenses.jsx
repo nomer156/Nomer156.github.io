@@ -3,12 +3,14 @@ import Chart from "chart.js/auto";
 import {
   addExpense,
   getExpenses,
+  getMonthlyTotal,
 } from "../../hooks/useDB.js";
 import "./Expenses.css";
 
 function Expenses() {
   const [input, setInput] = useState("");
   const [items, setItems] = useState(getExpenses());
+  const [monthTotal, setMonthTotal] = useState(getMonthlyTotal());
   const doughnutRef = useRef(null);
   const lineRef = useRef(null);
 
@@ -34,34 +36,17 @@ function Expenses() {
       });
     }
 
-    const monthly = Array(12).fill(0);
-    items.forEach((it) => {
-      const m = new Date(it.date).getMonth();
-      monthly[m] += Number(it.sum);
-    });
-
     if (lineRef.current) {
+      const mockLabels = ["Май", "Июн", "Июл", "Авг", "Сен", "Окт"];
+      const mockData = [5000, 3200, 4500, 3000, 3800, 4200];
       lineRef.current.replaceChildren();
       new Chart(lineRef.current, {
         type: "line",
         data: {
-          labels: [
-            "Янв",
-            "Фев",
-            "Мар",
-            "Апр",
-            "Май",
-            "Июн",
-            "Июл",
-            "Авг",
-            "Сен",
-            "Окт",
-            "Ноя",
-            "Дек",
-          ],
+          labels: mockLabels,
           datasets: [
             {
-              data: monthly,
+              data: mockData,
               borderColor: "#0D47A1",
               backgroundColor: "rgba(13,71,161,0.2)",
             },
@@ -85,6 +70,7 @@ function Expenses() {
     };
     addExpense(exp);
     setItems(getExpenses());
+    setMonthTotal(getMonthlyTotal());
     setInput("");
   };
 
@@ -100,14 +86,16 @@ function Expenses() {
         />
       </form>
 
-      <div className="expenses-charts">
-        <canvas ref={doughnutRef} className="expenses-chart" />
-        <canvas ref={lineRef} className="expenses-chart" />
+      <div className="expenses__summary">
+        <div className="expenses__total">Итого за месяц: {monthTotal} ₽</div>
+        <canvas ref={doughnutRef} className="expenses__chart" />
       </div>
 
-      <ul className="expenses-list">
+      <canvas ref={lineRef} className="expenses__chart" />
+
+      <ul className="expenses__list">
         {items.map((it) => (
-          <li key={it.id} className="expenses-item">
+          <li key={it.id} className="expenses__item">
             <span>{it.category}</span>
             <span>{it.sum} ₽</span>
           </li>
