@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   getCarInfo,
   saveCarInfo,
@@ -68,14 +69,19 @@ function Car() {
       </div>
 
       {tab === "mods" ? (
-        <ul className="car-mods">
-          {mods.length === 0 && <li>Нет модификаций</li>}
+        <div className="car-mods">
+          {mods.length === 0 && <p className="car__empty">Нет модификаций</p>}
           {mods.map((m) => (
-            <li key={m.id}>{m.title}</li>
+            <div key={m.id} className="car__mod-item">
+              {m.title}
+            </div>
           ))}
-        </ul>
+          <Link className="car__add-mod" to="/mods/new">
+            ➕ Добавить мод
+          </Link>
+        </div>
       ) : (
-        <p>Нет записей</p>
+        <p className="car__empty">Записей нет</p>
       )}
     </div>
   );
