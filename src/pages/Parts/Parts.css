@@ -49,13 +49,13 @@
   color: #fff;
 }
 
-.parts-list {
+.parts__list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.part-card {
+.parts__card {
   background: var(--card-bg);
   padding: 1rem;
   border-radius: 0.5rem;
@@ -63,13 +63,13 @@
   margin-bottom: 0.5rem;
 }
 
-.part-card__analogs {
+.parts__card-analogs {
   display: flex;
   gap: 0.25rem;
   margin-top: 0.5rem;
 }
 
-.part-card__analog {
+.parts__card-analog {
   background: var(--color-accent);
   color: #fff;
   border: none;
