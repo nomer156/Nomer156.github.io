@@ -1,44 +1,52 @@
 import { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('token'));
-  const [user, setUser] = useState(() => {
-    const stored = localStorage.getItem('user');
-    return stored ? JSON.parse(stored) : null;
+  const navigate = useNavigate();
+  const [auth, setAuth] = useState(() => {
+    const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
+    return {
+      token,
+      user: storedUser ? JSON.parse(storedUser) : null,
+    };
   });
+
+  const setUser = (user) => setAuth((a) => ({ ...a, user }));
 
   const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
   const login = async (username) => {
     await delay(500);
     const data = { token: 'demo-token', user: { id: 1, username } };
-    setToken(data.token);
-    setUser(data.user);
+    setAuth(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
+    return data;
   };
 
   const register = async (username) => {
     await delay(500);
     const data = { token: 'demo-token', user: { id: 1, username } };
-    setToken(data.token);
-    setUser(data.user);
+    setAuth(data);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
+    return data;
   };
 
   const logout = () => {
-    setToken(null);
-    setUser(null);
+    setAuth({ token: null, user: null });
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    localStorage.removeItem('carVin');
+    navigate('/login');
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout, setUser }}>
+    <AuthContext.Provider
+      value={{ user: auth.user, token: auth.token, login, register, logout, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
