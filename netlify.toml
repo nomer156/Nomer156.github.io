@@ -1,8 +1,14 @@
 [build]
+  # Команда для сборки
   command = "npm run build"
+  # Публиковать папку dist после сборки
   publish = "dist"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[context.stub-auth-and-vin-flow-for-carbuddy-pwa.environment]
+  # Если нужны env переменные для сборки
+  # Например: VITE_API_URL
+  # VITE_API_URL = "https://example.com/api"
+
+[context.production]
+  command = "npm run build"
+  publish = "dist"
